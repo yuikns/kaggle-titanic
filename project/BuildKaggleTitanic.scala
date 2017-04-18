@@ -2,8 +2,8 @@ import sbt.Keys._
 import sbt._
 import sbtassembly.AssemblyKeys._
 
-object BuildHsgl extends Build {
-  lazy val id = "hsgl" // dvergar
+object BuildKaggleTitanic extends Build {
+  lazy val id = "kaggle-titanic" // dvergar
 
   lazy val commonSettings = Seq(
     name := id,
@@ -11,7 +11,7 @@ object BuildHsgl extends Build {
     organization := "com.argcv",
     scalaVersion := "2.11.7",
     licenses := Seq("MIT" -> url("http://opensource.org/licenses/MIT")),
-    homepage := Some(url("https://github.com/yuikns/hsgl"))
+    homepage := Some(url("https://github.com/yuikns/kaggle-titanic"))
   )
 
   lazy val publishSettings = Seq(
@@ -37,11 +37,14 @@ object BuildHsgl extends Build {
       Classpaths.typesafeSnapshots
     ),
     libraryDependencies ++= Seq(
-      //"com.nativelibs4java" %% "scalacl" % "0.3-SNAPSHOT",
-      "com.nativelibs4java" % "javacl-core" % "1.0.0-RC4",
+      "org.deeplearning4j" % "deeplearning4j-core" % "0.4-rc3.8", // deeplearning4j
+      //"org.deeplearning4j" % "deeplearning4j-nlp" % "0.4-rc3.8", // deeplearning4j
+      //"org.deeplearning4j" % "deeplearning4j-ui" % "0.4-rc3.8", // deeplearning4j
+      "de.bwaldvogel" % "liblinear" % "1.95", // for liblinear
       "commons-pool" % "commons-pool" % "1.6", // pool for SockPool
       "net.liftweb" % "lift-webkit_2.11" % "3.0-M6", // a light weight framework for web
       "com.google.guava" % "guava" % "18.0", // string process etc. (snake case for example)
+      "org.apache.commons" % "commons-csv" % "1.2", // commons, parse csv
       "org.scalatest" % "scalatest_2.11" % "2.2.5" % "test"
     ),
     dependencyOverrides ++= Set(
@@ -52,6 +55,10 @@ object BuildHsgl extends Build {
     )
   )
 
+  /**
+   * ~~ deduplicate: different file contents found in the following:~~
+   * http://stackoverflow.com/questions/25144484/sbt-assembly-deduplication-found-error
+   */
   lazy val assemblySettings = Seq(
     assemblyJarName in assembly := s"$id.jar"
   )

@@ -1,8 +1,8 @@
-# Pattern Counter 
+# Sol: Titanic in Kaggle
 
 
 ## Usage
 
 ```bash
-git clone --recurse-submodules git@github.com:yuikns/pattern-counter.git
+git clone --recurse-submodules git@github.com:yuikns/kaggle-titanic.git
 ```
